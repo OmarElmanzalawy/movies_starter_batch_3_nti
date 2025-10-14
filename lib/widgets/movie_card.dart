@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:movies_starter/widgets/category_capsule.dart';
+
+class MovieCard extends StatelessWidget {
+  const MovieCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    "https://xl.movieposterdb.com/24_10/2023/15398776/xl_oppenheimer-movie-poster_01185382.jpeg",
+                    width: 80,
+                    height: 120,
+                    fit: BoxFit.cover,
+                    ),
+                ),
+                  const SizedBox(width: 8,),
+                  Expanded(
+                    child: Container(
+                      // color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Oppenheimer",style: TextStyle(fontSize: 22,color: Colors.white,fontWeight: FontWeight.bold),),
+                          const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Icon(Icons.star,color: Colors.amber,),
+                              Text("7.5/10",style: TextStyle(fontWeight: FontWeight.bold),)
+                            ],
+                          ),
+                          const SizedBox(height: 8,),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 10,
+                            children: [
+                              CategoryCapsule(label: "Action"),
+                              CategoryCapsule(label: "Comedy"),
+                            ],
+                          ),
+                          // const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Icon(Icons.access_time,color: Colors.teal,),
+                              const SizedBox(width: 3,),
+                              Text("2025-10-01"),
+                              Spacer(),
+                              IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline))
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                              ],
+            ),
+          );
+  }
+}
+
+
+// nti_course
+// test12345
