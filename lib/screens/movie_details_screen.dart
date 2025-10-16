@@ -13,16 +13,18 @@ class MovieDetailsScreen extends StatelessWidget {
     print(size.size.height);
     return Scaffold(
       body: Container(
-        color: Colors.purple,
         child: Column(
           children: [
             Expanded(
               child: Stack(
                 children: [
-                  Image.network("https://image.tmdb.org/t/p/w500${model.backdropPath}",
-                  height: size.size.height * 0.45,
-                  width: size.size.width,
-                  fit: BoxFit.cover,
+                  Hero(
+                    tag: model.id,
+                    child: Image.network("https://image.tmdb.org/t/p/w500${model.backdropPath}",
+                    height: size.size.height * 0.45,
+                    width: size.size.width,
+                    fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
                     bottom: 0,
