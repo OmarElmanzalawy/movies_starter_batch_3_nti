@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_starter/services/api_service.dart';
+import 'package:movies_starter/view_model/app_brain.dart';
 import 'package:movies_starter/widgets/movie_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    ApiService.fetchPopularMovies();
+   ApiService.fetchPopularMovies();
     super.initState();
   }
 
@@ -29,11 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode)),
         ],
       ),
-      body: Column(
-        children: [
-          //Moive Card UI
-         MovieCard()
-        ],
+      body: ValueListenableBuilder(
+        valueListenable: appBrain.movies,
+        builder:(context, value, child) {
+          return ListView.builder(
+          itemCount: appBrain.movies.value.length,
+          itemBuilder:(context, index) {
+            return MovieCard();
+          },
+          );
+        } 
       )
     );
   }

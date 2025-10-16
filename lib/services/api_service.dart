@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:movies_starter/models/movie_model.dart';
+import 'package:movies_starter/view_model/app_brain.dart';
 
 class ApiService {
 
@@ -11,7 +12,7 @@ class ApiService {
 
   
 
-  static void fetchPopularMovies()async{
+  static Future<void> fetchPopularMovies()async{
 
     final Map<String,String> header = {
     "Authorization": "Bearer $apiKey"
@@ -49,6 +50,8 @@ class ApiService {
             voteAverage: map["vote_average"],
              voteCount: map['vote_count']);
       }).toList();
+
+      appBrain.movies.value = fetchedMovies;
 
       print(fetchedMovies.length);
     }
