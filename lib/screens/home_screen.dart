@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_starter/screens/movie_details_screen.dart';
 import 'package:movies_starter/services/api_service.dart';
 import 'package:movies_starter/view_model/app_brain.dart';
 import 'package:movies_starter/widgets/movie_card.dart';
@@ -36,8 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView.builder(
           itemCount: appBrain.movies.value.length,
           itemBuilder:(context, index) {
-            return MovieCard(
-              model: appBrain.movies.value[index],
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder:(context) => MovieDetailsScreen(
+                  model: appBrain.movies.value[index],
+                ),));
+              },
+              child: MovieCard(
+                model: appBrain.movies.value[index],
+              ),
             );
           },
           );
