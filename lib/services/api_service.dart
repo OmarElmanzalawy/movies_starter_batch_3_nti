@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:movies_starter/models/movie_model.dart';
 
 class ApiService {
 
@@ -22,8 +24,34 @@ class ApiService {
     headers: header
     );
 
-    print(response.body);
-    print(response.statusCode);
+    // print(response.body);
+    // print(response.statusCode);
+
+    if(response.statusCode == 200){
+      print(response.body.runtimeType);
+      //deserialization
+      final mapResponse = jsonDecode(response.body);
+      print(mapResponse.runtimeType);
+
+      final results = mapResponse["results"] as List;
+      final fetchedMovies = results.map((map){
+        return MovieModel(
+          adult: map["adult"],
+          backdropPath: map["backdrop_path"],
+          id: map["id"],
+          originalLanguage: map["original_language"],
+          originalTitle: map["original_title"],
+          overview: map["overview"],
+          popularity: map["popularity"],
+          posterPath: map["poster_path"],
+          releaseDate: map["release_date"],
+           title: map["title"],
+            voteAverage: map["vote_average"],
+             voteCount: map['vote_count']);
+      }).toList();
+
+      print(fetchedMovies.length);
+    }
 
   }
 
