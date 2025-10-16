@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movies_starter/models/movie_model.dart';
 import 'package:movies_starter/widgets/category_capsule.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key});
+  const MovieCard({super.key,required this.model});
+
+  final MovieModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class MovieCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
-                    "https://xl.movieposterdb.com/24_10/2023/15398776/xl_oppenheimer-movie-poster_01185382.jpeg",
+                    "https://image.tmdb.org/t/p/w500${model.backdropPath}",
                     width: 80,
                     height: 120,
                     fit: BoxFit.cover,
@@ -28,12 +31,12 @@ class MovieCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Oppenheimer",style: TextStyle(fontSize: 22,color: Colors.white,fontWeight: FontWeight.bold),),
+                          Text(model.title,style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
                           const SizedBox(height: 8,),
                           Row(
                             children: [
                               Icon(Icons.star,color: Colors.amber,),
-                              Text("7.5/10",style: TextStyle(fontWeight: FontWeight.bold),)
+                              Text("${model.voteAverage.toStringAsFixed(1)}/10",style: TextStyle(fontWeight: FontWeight.bold),)
                             ],
                           ),
                           const SizedBox(height: 8,),
@@ -50,7 +53,7 @@ class MovieCard extends StatelessWidget {
                             children: [
                               Icon(Icons.access_time,color: Colors.teal,),
                               const SizedBox(width: 3,),
-                              Text("2025-10-01"),
+                              Text(model.releaseDate),
                               Spacer(),
                               IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline))
                             ],

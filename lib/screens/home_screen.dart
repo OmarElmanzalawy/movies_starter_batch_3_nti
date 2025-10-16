@@ -36,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView.builder(
           itemCount: appBrain.movies.value.length,
           itemBuilder:(context, index) {
-            return MovieCard();
+            return MovieCard(
+              model: appBrain.movies.value[index],
+            );
           },
           );
         } 
