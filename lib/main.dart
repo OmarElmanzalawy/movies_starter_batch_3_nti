@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movies_starter/screens/home_screen.dart';
 import 'package:movies_starter/view_model/app_brain.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await appBrain.initializeApp();
   runApp(const MainApp());
 }
 

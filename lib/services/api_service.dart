@@ -7,12 +7,14 @@ import 'package:movies_starter/view_model/app_brain.dart';
 
 class ApiService {
 
-  static final String endpoint = "https://api.themoviedb.org/3/movie/popular";
+  
   static final String apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNThlZDI2ODU4ZjA4ODYxZDYwZGNkNjdhM2RmYzZmYyIsIm5iZiI6MTc2MDQ0MjA1NC40NzEsInN1YiI6IjY4ZWUzNmM2ODhiYjBlNzg3NTI4MmIyMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.n8uHiJgPaJ_EuF9rz_CBsktOC3wimTXVZs6ZwF0Oguk";
 
   
 
-  static Future<void> fetchPopularMovies()async{
+  static Future<void> fetchPopularMovies({int page = 1})async{
+
+    final String endpoint = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=$page";
 
     final Map<String,String> header = {
     "Authorization": "Bearer $apiKey"
@@ -51,9 +53,11 @@ class ApiService {
              voteCount: map['vote_count']);
       }).toList();
 
-      appBrain.movies.value = fetchedMovies;
+      appBrain.movies.value = [...appBrain.movies.value, ...fetchedMovies];
 
       print(fetchedMovies.length);
+
+      appBrain.currentPage += 1;
     }
 
   }

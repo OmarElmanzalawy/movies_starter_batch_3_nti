@@ -14,9 +14,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  final scrollcontroller = ScrollController();
+
   @override
   void initState() {
    ApiService.fetchPopularMovies();
+   scrollcontroller.addListener((){
+    print(scrollcontroller.position.pixels);
+    if(scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent){
+      print("REached end of the list");
+      ApiService.fetchPopularMovies(page: appBrain.currentPage);
+    }
+   });
     super.initState();
   }
 
@@ -40,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         valueListenable: appBrain.movies,
         builder:(context, value, child) {
           return ListView.builder(
+          controller: scrollcontroller,
           itemCount: appBrain.movies.value.length,
           itemBuilder:(context, index) {
             return GestureDetector(

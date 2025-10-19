@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:movies_starter/models/movie_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Global object
 final appBrain = AppBrain();
@@ -9,9 +10,23 @@ class AppBrain {
   ValueNotifier<List<MovieModel>> movies = ValueNotifier([]);
   ValueNotifier<List<MovieModel>> favoriteMovies = ValueNotifier([]);
   ValueNotifier<bool> isDarkMode = ValueNotifier(true);
+  int currentPage = 1;
 
-  void toggleTheme(){
+  Future<void> initializeApp()async{
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final savedTheme = await prefs.getBool("theme");
+
+    isDarkMode.value = savedTheme ?? true;
+
+  }
+
+  void toggleTheme()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    
     isDarkMode.value = !isDarkMode.value;
+    await prefs.setBool("theme", isDarkMode.value);
   }
 
   void addToFavorites(MovieModel movies){
