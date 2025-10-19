@@ -34,7 +34,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       height: size.size.height * 0.6,
                       width: size.size.width,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade900,
+                        color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade900 : Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(25)
                       ),
                       child: Column(
@@ -69,7 +69,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     left: 15,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade900,
+                        color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade900 : Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: IconButton(onPressed: (){

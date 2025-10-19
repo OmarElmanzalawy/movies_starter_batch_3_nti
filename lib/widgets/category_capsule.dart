@@ -10,7 +10,7 @@ class CategoryCapsule extends StatelessWidget {
     return  Container(
                                 padding: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade800,
+                                  color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300,
                                   borderRadius: BorderRadius.circular(25)
                                 ),
                                 child: Text(label,style: TextStyle(fontSize: 10),),

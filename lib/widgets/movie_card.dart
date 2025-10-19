@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_starter/models/movie_model.dart';
+import 'package:movies_starter/view_model/app_brain.dart';
 import 'package:movies_starter/widgets/category_capsule.dart';
 
 class MovieCard extends StatelessWidget {
@@ -34,7 +35,7 @@ class MovieCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(model.title,style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),),
+                          Text(model.title,style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold),),
                           const SizedBox(height: 8,),
                           Row(
                             children: [
@@ -58,7 +59,9 @@ class MovieCard extends StatelessWidget {
                               const SizedBox(width: 3,),
                               Text(model.releaseDate),
                               Spacer(),
-                              IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline))
+                              IconButton(onPressed: (){
+                                appBrain.addToFavorites(model);
+                              }, icon: Icon(Icons.favorite_outline))
                             ],
                           )
                         ],
