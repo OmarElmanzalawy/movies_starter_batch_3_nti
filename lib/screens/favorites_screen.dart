@@ -9,7 +9,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Favorite Movies"),),
-      body:  appBrain.favoriteMovies.value.length == 0 ?
+      body: appBrain.favoriteMovies.value.length == 0 ?
       Center(
         child: Text("No movies added to favorite yet"),
       ):

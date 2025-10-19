@@ -60,8 +60,23 @@ class MovieCard extends StatelessWidget {
                               Text(model.releaseDate),
                               Spacer(),
                               IconButton(onPressed: (){
-                                appBrain.addToFavorites(model);
-                              }, icon: Icon(Icons.favorite_outline))
+                                if(appBrain.favoriteMovies.value.contains(model)){
+                                  print("removing movie");
+                                  appBrain.removeFromFavorites(model);
+                                  
+                                }else{
+                                  print("Adding movie");
+                                  appBrain.addToFavorites(model);
+                                }
+                              }, icon: ValueListenableBuilder(
+                                valueListenable: appBrain.favoriteMovies,
+                                builder:(context, value, child) {
+                                  final isFavorite = appBrain.favoriteMovies.value.contains(model);
+                                  return Icon( isFavorite ? Icons.favorite : Icons.favorite_outline,
+                                  color: isFavorite ? Colors.red : null,
+                                  );
+                                }, 
+                                ))
                             ],
                           )
                         ],
