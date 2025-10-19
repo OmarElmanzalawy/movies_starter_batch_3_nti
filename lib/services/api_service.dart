@@ -42,6 +42,7 @@ class ApiService {
           adult: map["adult"],
           backdropPath: map["backdrop_path"],
           id: map["id"],
+          genreIds: map["genre_ids"],
           originalLanguage: map["original_language"],
           originalTitle: map["original_title"],
           overview: map["overview"],
@@ -58,6 +59,50 @@ class ApiService {
       print(fetchedMovies.length);
 
       appBrain.currentPage += 1;
+    }
+
+  }
+
+  static void fetchMovieGenres()async{
+
+    final endpoint = "https://api.themoviedb.org/3/genre/movie/list";
+
+     final Map<String,String> header = {
+    "Authorization": "Bearer $apiKey"
+  };
+
+  final url = Uri.parse(endpoint);
+
+  final response =  await http.get(
+    url,
+    headers: header
+    );
+
+    // print(response.body);
+
+    if(response.statusCode == 200){
+
+      final mapResponse = jsonDecode(response.body);
+
+      final genresList = mapResponse["genres"] as List;
+
+      Map<int,String> genreMap = {};
+
+      /* {
+      28: Action
+
+      }
+    
+    */
+
+      for(var genre in genresList){
+        genreMap[genre["id"]] = genre["name"];
+      }
+
+      print(genreMap);
+
+      appBrain.genresMap = genreMap;
+
     }
 
   }

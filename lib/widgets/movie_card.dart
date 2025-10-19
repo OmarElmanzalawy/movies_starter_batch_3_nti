@@ -47,10 +47,10 @@ class MovieCard extends StatelessWidget {
                           Wrap(
                             spacing: 8,
                             runSpacing: 10,
-                            children: [
-                              CategoryCapsule(label: "Action"),
-                              CategoryCapsule(label: "Comedy"),
-                            ],
+                            children: model.genreIds.map((id) {
+                              final label = appBrain.genresMap[id];
+                              return CategoryCapsule(label: label ?? "N/A");
+                            }).toList()
                           ),
                           // const SizedBox(height: 8,),
                           Row(

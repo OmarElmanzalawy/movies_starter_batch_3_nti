@@ -3,6 +3,7 @@ class MovieModel {
   final bool adult;
   final String? backdropPath;
   final int id;
+  final List genreIds;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
@@ -25,6 +26,7 @@ class MovieModel {
     required this.releaseDate,
     required this.title,
     required this.voteAverage,
-    required this.voteCount
+    required this.voteCount,
+    required this.genreIds
   });
 }

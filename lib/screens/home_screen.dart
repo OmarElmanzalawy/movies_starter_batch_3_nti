@@ -18,9 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+   ApiService.fetchMovieGenres();
    ApiService.fetchPopularMovies();
    scrollcontroller.addListener((){
-    print(scrollcontroller.position.pixels);
+    
     if(scrollcontroller.position.pixels == scrollcontroller.position.maxScrollExtent){
       print("REached end of the list");
       ApiService.fetchPopularMovies(page: appBrain.currentPage);

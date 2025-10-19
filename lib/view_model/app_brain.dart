@@ -10,6 +10,7 @@ class AppBrain {
   ValueNotifier<List<MovieModel>> movies = ValueNotifier([]);
   ValueNotifier<List<MovieModel>> favoriteMovies = ValueNotifier([]);
   ValueNotifier<bool> isDarkMode = ValueNotifier(true);
+  Map<int,String> genresMap = {};
   int currentPage = 1;
 
   Future<void> initializeApp()async{
